@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">	
+<!-- mapper 에 사용되는 xml마다 작성해야 하는 dtd 가 다르다. mapper-config.xml과 동일하게 해서 오류발생했었음 -->
+
+<mapper namespace="com.kopo.mapper.MemberMapper"> 
+	
+	<select id="getTime" resultType="string">
+	select now()
+	</select>
+	
+	<insert id="insertMember">
+	insert into tbl_member (userid, userpw, username, email) values (#{userid}, #{userpw}, #{username}, #{email})
+	</insert>
+
+</mapper>
