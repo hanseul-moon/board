@@ -7,26 +7,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-<body>
-	<form role="form" method="post">
-		<div class="box-body">
-			<div class="form-group">
-				<label for="exampleInputEmail1">제목</label>
-				<input type="text" name='title' class="form-control">
+
+<body class="container" style="background:lightgray;">
+	<div>
+		<!-- 본문 부분 -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-primary">
+				
+					<!-- 게시글 제목  -->
+					<div class="box-header">
+						<h3 class="box-title">Register Board</h3>
+					</div>
+					
+					<form role="form" method="post">
+						
+						<!-- 게시글 내용 -->
+						<div class="box-body">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Title</label>
+								<input type="text" name='title' class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Content</label>
+								<textarea class="form-control" name="content" rows="3" ></textarea>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputEmail1">Writer</label>
+								<input type="text" name="writer" class="form-control">
+							</div>	
+						</div>
+						
+						<!-- 게시글 버튼 -->
+						<div class="box-footer">
+							<button type="submit" id="save" class="btn btn-default">Submit</button>							
+							<button id="cancel" class="btn btn-default">Cancel</button>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="form-group">
-				<label for="exampleInputPassword1">내용</label>
-				<textarea class="form-control" name="content" rows="3" ></textarea>
-			</div>
-			<div class="form-group">
-				<label for="exampleInputEmail1">작성자</label>
-				<input type="text" name="writer" class="form-control">
-			</div>	
 		</div>
-		<div class="box-footer">
-			<button type="submit" class="btn btn-primary">전송</button>
-		</div>
-	</form>
+	</div>
+	<script>
+		$(document).ready(function(){
+			
+			var formObj = $("form[role='form']");
+			
+			$("#cancel").on("click", function(){
+				self.location = "listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
+			});
+		});	
+	</script>
 </body>
 </html>
 <%@include file="../include/footer.jsp"%>

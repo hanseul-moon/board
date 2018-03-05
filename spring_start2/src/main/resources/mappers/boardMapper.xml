@@ -4,38 +4,72 @@
 <!-- mapper 에 사용되는 xml마다 작성해야 하는 dtd 가 다르다. mapper-config.xml과 동일하게 해서 오류발생했었음 -->
 
 <mapper namespace="com.kopo.mapper.BoardMapper"> 
-
-<insert id="create">
-insert into tbl_board (title, content, writer) 
-values (#{title}, #{content}, #{writer})
-</insert>
-
-<select id="read" resultType="com.kopo.domain.BoardVO">
-select 
-	bno, title, content, writer, regdate, viewcnt 
-from 
-	tbl_board
-where bno = #{bno}
-</select>
-
-<update id="update">
-update tbl_board set title = #{title}, content = #{content}
-where bno = #{bno}
-</update>
-
-<delete id="delete">
-delete from tbl_board where bno = #{bno}
-</delete>
-
-<select id="listAll" resultType="com.kopo.domain.BoardVO">
-<![CDATA[
-select 
-	bno, title, content, writer, regdate, viewcnt 
-from 
-	tbl_board
-where bno > 0
-order by bno desc, regdate desc
-]]>
-</select>
+	
+	<insert id="create">
+	insert into 
+		tbl_board (title, content, writer) 
+	values 
+		(#{title}, #{content}, #{writer})
+	</insert>
+	
+	<select id="read" resultType="com.kopo.domain.BoardVO">
+	select 
+		bno, title, content, writer, regdate, viewcnt 
+	from 
+		tbl_board
+	where bno = #{bno}
+	</select>
+	
+	<update id="update">
+	update 
+		tbl_board 
+	set 
+		title = #{title}, content = #{content}
+	where
+		bno = #{bno}
+	</update>
+	
+	<delete id="delete">
+	delete from 
+		tbl_board 
+	where 
+		bno = #{bno}
+	</delete>
+	
+	<select id="listAll" resultType="com.kopo.domain.BoardVO">
+	<![CDATA[
+	select 
+		bno, title, content, writer, regdate, viewcnt 
+	from 
+		tbl_board
+	where 
+		bno > 0
+	order by bno desc, regdate desc
+	]]>
+	</select>
+	
+	<select id="listCriteria" resultType="com.kopo.domain.BoardVO">
+	<![CDATA[
+	select 
+		bno, title, content, writer, regdate, viewcnt 
+	from 
+		tbl_board
+	where 
+		bno > 0
+	order by bno desc, regdate desc
+	limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<select id="countPaging" resultType="int">
+	<![CDATA[
+	select
+		count(bno)
+	from
+		tbl_board
+	where
+		bno > 0
+	]]>
+	</select>
 
 </mapper>

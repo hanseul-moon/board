@@ -24,8 +24,8 @@
 					<input type='hidden' name='bno' value="${boardVO.bno}"> 
 					<input type='hidden' name='page' value="${cri.page}"> 
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
-					<%-- <input type='hidden' name='searchType' value="${cri.searchType}">
-					<input type='hidden' name='keyword' value="${cri.keyword}"> --%>
+					<input type='hidden' name='searchType' value="${cri.searchType}">
+					<input type='hidden' name='keyword' value="${cri.keyword}">
 				</form>
 				
 				<!-- 본문 게시글 내용 -->
@@ -46,9 +46,9 @@
 				
 				<!-- 본문 게시글 버튼 -->
 				<div class="box-footer">
-					<button type="submit" class="btn btn-default" id="modifyBtn">Modify</button>
-					<button type="submit" class="btn btn-default" id="removeBtn">Delete</button>
-					<button type="submit" class="btn btn-default" id="goListBtn">List</button>
+					<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
+					<button type="submit" class="btn btn-danger" id="removeBtn">Delete</button>
+					<button type="submit" class="btn btn-primary" id="goListBtn">List</button>
 				</div>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 	<!-- 댓글 부분 -->
 	<div class="row">
 		<div class="col-md-12">
-			<div class="box">
+			<div class="box box-success">
 			
 				<!-- 댓글 타이틀 -->
 				<div class="box-header">
@@ -75,13 +75,13 @@
 				
 				<!-- 해당 댓글 버튼 -->
 				<div class="box-footer">
-					<button type="button" class="btn btn-default" id="replyAddBtn">New Reply</button>
+					<button type="button" class="btn btn-primary" id="replyAddBtn">New Reply</button>
 				</div>
 			</div>
 
 			<!-- 지난 댓글 목록 -->
 			<ul class="timeline">
-				<li class="time-label" id="repliesDiv"><span class="bg-blue">Reply List </span></li>
+				<li class="time-label" id="repliesDiv"><span class="bg-green">Reply List </span></li>
 			</ul>
 
 			<div class='text-center'>
@@ -106,8 +106,8 @@
 				
 				<!-- 댓글 버튼 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" id="replyModBtn">Modify</button>
-					<button type="button" class="btn btn-default" id="replyDelBtn">Delete</button>
+					<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+					<button type="button" class="btn btn-danger" id="replyDelBtn">Delete</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
@@ -127,7 +127,7 @@
   <div class="timeline-body">{{replytext}} </div>
     <div class="timeline-footer">
      <a class="btn btn-primary btn-xs" 
-	    data-toggle="modal" data-target="#modifyModal">Modify</a>
+	    data-toggle="modal" data-target="#modifyModal">수정</a>
     </div>
   </div>			
 </li>
@@ -311,19 +311,19 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/board/modify");
+		formObj.attr("action", "/sboard/modifyPage");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
 	
 	$("#removeBtn").on("click", function(){
-		formObj.attr("action", "/board/remove");
+		formObj.attr("action", "/sboard/removePage");
 		formObj.submit();
 	});
 	
 	$("#goListBtn ").on("click", function(){
 		formObj.attr("method", "get");
-		formObj.attr("action", "/board/listPage");
+		formObj.attr("action", "/sboard/list");
 		formObj.submit();
 	});
 	

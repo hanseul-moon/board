@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kopo.domain.BoardVO;
+import com.kopo.domain.Criteria;
 import com.kopo.domain.MemberVO;
 
 @Repository
@@ -51,7 +52,22 @@ public class BoardDAOImpl implements BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace + ".listAll");
 	}
-	
-	
 
+	@Override
+	public List<BoardVO> listPage(int page) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".listPage", page);
+	}
+
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace + ".listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".countPaging", cri);
+	}
 }

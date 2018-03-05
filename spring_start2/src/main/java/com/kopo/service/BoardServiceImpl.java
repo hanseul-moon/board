@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kopo.dao.BoardDAO;
 import com.kopo.domain.BoardVO;
+import com.kopo.domain.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -22,9 +23,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void read(Integer bno) throws Exception {
+	public BoardVO read(Integer bno) throws Exception {
 		// TODO Auto-generated method stub
-		dao.read(bno);
+		return dao.read(bno);
 	}
 
 	@Override
@@ -45,4 +46,15 @@ public class BoardServiceImpl implements BoardService {
 		return dao.listAll();
 	}
 
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
 }
