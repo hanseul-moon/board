@@ -5,19 +5,9 @@
 <%@include file="../include/header.jsp"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="../resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
-<script>
-	// cancel 버튼 클릭 이벤트
-	$(document).ready(function(){
-		var formObj = $("form[role='form']");
-		
-		$("#cancel").on("click", function(){
-			self.location = "listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
-		});
-	});
 
-	</script>
 	</head>
 <body class="container" style="background:lightgray;">
 	<div>
@@ -52,14 +42,22 @@
 						<!-- 게시글 버튼 -->
 						<div class="box-footer">
 							<button type="submit" id="save" class="btn btn-default">Submit</button>							
-							<button id="cancel" class="btn btn-default">Cancel</button>
+							<input type='button' id="cancel" name="cancel" class="btn btn-default" value="Cancel"/>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+	<script>
+	// cancel 버튼 클릭 이벤트
+	$(document).ready(function(){
+		
+		$("#cancel").on("click", function(){
+			self.location = "listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
+		});
+	});
+
+	</script>
 </body>
 </html>
-<%@include file="../include/footer.jsp"%>

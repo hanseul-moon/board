@@ -40,8 +40,13 @@ public class MobileController {
 	}
 	
 	@RequestMapping(value="/registerMobile", method=RequestMethod.GET)
-	public void registerGET(BoardVO board, Model model) throws Exception{
+	public void registerGET(BoardVO board,
+							@ModelAttribute("cri") Criteria cri,
+							Model model) throws Exception{
+		
 		logger.info("regist get ok");
+		model.addAttribute("page", cri.getPage());				// jsp로 값 전달
+		model.addAttribute("perPageNum", cri.getPerPageNum());	// jsp로 값 전달
 	}
 	
 	@RequestMapping(value="/registerMobile", method=RequestMethod.POST)
@@ -50,12 +55,8 @@ public class MobileController {
 							   RedirectAttributes rttr) throws Exception{
 		
 		logger.info("regist post ok");
-		logger.info(board.toString());
 		
 		service.regist(board);
-		
-		rttr.addAttribute("page", cri.getPage());				// jsp로 값 전달
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());	// jsp로 값 전달
 		rttr.addFlashAttribute("msg", "SUCCESS");		
 		
 		return "redirect:/board/listMobile";

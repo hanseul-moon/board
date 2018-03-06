@@ -29,8 +29,12 @@ public class BoardController {
 	
 	// 게시물 등록 화면
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public void registerGET(BoardVO board, Model model) throws Exception{
+	public void registerGET(BoardVO board,
+							@ModelAttribute("cri") Criteria cri,
+							Model model) throws Exception{
 		logger.info("regist get ok");
+		model.addAttribute("page", cri.getPage());				// jsp로 값 전달
+		model.addAttribute("perPageNum", cri.getPerPageNum());	// jsp로 값 전달
 	}
 	
 	// 게시물 등록 동작
@@ -40,12 +44,8 @@ public class BoardController {
 							   RedirectAttributes rttr) throws Exception{
 		
 		logger.info("regist post ok");
-		logger.info(board.toString());
 		
 		service.regist(board);
-		
-		rttr.addAttribute("page", cri.getPage());				// jsp로 값 전달
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());	// jsp로 값 전달
 		rttr.addFlashAttribute("msg", "SUCCESS");		
 		
 		return "redirect:/board/listPage";
