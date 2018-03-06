@@ -7,66 +7,30 @@
 <html>
 <head>   
 	<script>
+		// 완료 메세지 띄우기
 		var result = '${msg}';
 		
-		if(result == 'SUCCESS'){		
+		if(result == 'SUCCESS'){			
 			alert("처리가 완료되었습니다.");
+			registCnt = Number(getCookie(ip())) + 1;
+			setCookie(ip(), registCnt, 1);
+			alert(getCookie(ip()));	
 			
 		}else if(result == 'MODIFY SUCCESS'){
 			alert("처리가 완료되었습니다.");
 			
 		}else if(result == 'REMOVE SUCCESS'){
-			alert("처리가 완료되었습니다.");
-		}
-
-		
-		function setCookie(cookie_name, value, days) {
-			  var exdate = new Date();
-			  exdate.setDate(exdate.getDate() + days);
-			  // 설정 일수만큼 현재시간에 만료값으로 지정
-		
-			  var cookie_value = escape(value) + ((days == null) ? '' : ';    expires=' + exdate.toUTCString());
-			  document.cookie = cookie_name + '=' + cookie_value;
+			alert("처리가 완료되었습니다.");;	
 		}
 		
-		 function getCookie(cookie_name) {
-			  var x, y;
-			  var val = document.cookie.split(';');
-		
-			  for (var i = 0; i < val.length; i++) {
-				  x = val[i].substr(0, val[i].indexOf('='));
-				  y = val[i].substr(val[i].indexOf('=') + 1);
-				  x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-				  if (x == cookie_name) {
-				    return unescape(y); // unescape로 디코딩 후 값 리턴
-				  }
-			  }
-		} 
-		
-		var ipCheck = true;
-		var registCnt = 0;
-		
-		function registCk(){
-			if(getCookie(ip()) == undefined){
-				setCookie(ip(), 0, 1);
-				ipCheck = true;
-				
-			}else{		
-				registCnt = Number(getCookie(ip()));
-				if(registCnt >= 3){
-					ipCheck = false;
-					location.href='list';							
-				}
-			} 
-		}
-		
+		// 등록 버튼을 클릭 이벤트
 		$(document).ready(
-			function() {
-
+			function() {						
 				$('#newBtn').on("click", function(evt) {
-					location.href = '/board/register?page=${cri.page}&perPageNum=${cri.perPageNum}';
+					location.href = '/board/register?page=${cri.page}&perPageNum=${cri.perPageNum}';	
 			});
 		});
+		
 	</script>
 </head>
 <body class="container" style="background:lightgray;">
@@ -81,7 +45,7 @@
 					<h3 class="box-title">Board</h3>
 				</div>
 				<div align='right' style='margin-right:10px;'>
-					<button id='newBtn' class="btn btn-default" onclick='registCk();'>New Board</button>
+					<button id='newBtn' class="btn btn-default">New Board</button>
 				</div>
 				
 				<!--  본문 게시글 내용 -->
@@ -134,7 +98,6 @@
 		</div>
 	</div>
 	</section>
-	
 </body>
 </html>
 <%@include file="../include/footer.jsp"%>

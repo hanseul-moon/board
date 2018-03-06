@@ -23,4 +23,7 @@
     <![endif]-->
      <!-- jQuery 2.1.4 -->
     <script src="../resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- ip 가져오는 import -->
+    <script type="text/javascript" src="http://jsgetip.appspot.com"></script>	
+    
     

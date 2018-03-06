@@ -13,7 +13,7 @@
 		var formObj = $("form[role='form']");
 		
 		$("#cancel").on("click", function(){
-			self.location = "listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
+			self.location = "listMobile?page=${cri.page}&perPageNum=${cri.perPageNum}";
 		});
 	});
 

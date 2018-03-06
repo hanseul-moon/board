@@ -17,24 +17,34 @@ import com.kopo.domain.Criteria;
 import com.kopo.domain.PageMaker;
 import com.kopo.service.BoardService;
 
-// 웹 컨트롤러
 @Controller
 @RequestMapping("/board/*")
-public class BoardController {
+public class MobileController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Inject
 	private BoardService service;
 	
-	// 게시물 등록 화면
-	@RequestMapping(value="/register", method=RequestMethod.GET)
+	@RequestMapping(value="/listMobile", method=RequestMethod.GET)
+	public void listMobile(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
+		
+		model.addAttribute("list", service.listCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countPaging(cri));
+		
+		model.addAttribute("pageMaker",pageMaker);
+		
+		logger.info("start listMobile method!");
+	}
+	
+	@RequestMapping(value="/registerMobile", method=RequestMethod.GET)
 	public void registerGET(BoardVO board, Model model) throws Exception{
 		logger.info("regist get ok");
 	}
 	
-	// 게시물 등록 동작
-	@RequestMapping(value="/register", method=RequestMethod.POST)
+	@RequestMapping(value="/registerMobile", method=RequestMethod.POST)
 	public String registerPOST(BoardVO board, 
 							   @ModelAttribute("cri") Criteria cri,
 							   RedirectAttributes rttr) throws Exception{
@@ -48,49 +58,19 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());	// jsp로 값 전달
 		rttr.addFlashAttribute("msg", "SUCCESS");		
 		
-		return "redirect:/board/listPage";
-	}
-	
-	// 게시물 리스트 조회 화면
-	@RequestMapping(value="/listPage", method=RequestMethod.GET)
-	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
-		
-		model.addAttribute("list", service.listCriteria(cri));
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(service.countPaging(cri));
-		
-		model.addAttribute("pageMaker",pageMaker);
-		
-		logger.info("start listPage method!");
+		return "redirect:/board/listMobile";
 	}
 	
 	// 게시물 상세 조회 화면
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	@RequestMapping(value = "/readMobile", method = RequestMethod.GET)
 	public void read(@RequestParam("bno") int bno, 
 					 @ModelAttribute("cri") Criteria cri,
 					Model model) throws Exception {
 	
 		model.addAttribute("boardVO", service.read(bno));
 	}
-	  
-	// 게시물 삭제 동작
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public String remove(@RequestParam("bno") int bno, 
-						 @ModelAttribute("cri") Criteria cri,
-						 RedirectAttributes rttr) throws Exception{
-		
-		service.remove(bno);
-		
-		rttr.addAttribute("page", cri.getPage());				// jsp로 값 전달
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());	// jsp로 값 전달
-		rttr.addFlashAttribute("msg", "REMOVE SUCCESS");		
-		
-		return "redirect: /board/listPage";
-	}
 	
-	// 게시물 수정 화면
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	@RequestMapping(value = "/modifyMobile", method = RequestMethod.GET)
 	public void modifyGET(@RequestParam("bno") int bno,
 						  @ModelAttribute("cri") Criteria cri,	// jsp로 객체 값 전달
 					      Model model) throws Exception{
@@ -101,7 +81,7 @@ public class BoardController {
 	}
 	
 	// 게시물 수정 동작
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	@RequestMapping(value = "/modifyMobile", method = RequestMethod.POST)
 	public String modifyPOST(BoardVO board, 
 			 @ModelAttribute("cri") Criteria cri,
 			RedirectAttributes rttr) throws Exception{
@@ -113,7 +93,6 @@ public class BoardController {
 		rttr.addAttribute("page", cri.getPage());				// jsp로 값 전달
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());	// jsp로 값 전달
 		rttr.addFlashAttribute("msg", "MODIFY SUCCESS");
-		return "redirect: /board/listPage";
+		return "redirect: /board/listMobile";
 	}
-
 }

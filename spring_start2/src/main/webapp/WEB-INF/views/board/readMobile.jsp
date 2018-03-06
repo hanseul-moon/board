@@ -309,7 +309,7 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/board/modify");
+		formObj.attr("action", "/board/modifyMobile");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
@@ -321,7 +321,7 @@ $(document).ready(function(){
 	
 	$("#goListBtn ").on("click", function(){
 		formObj.attr("method", "get");
-		formObj.attr("action", "/board/listPage");
+		formObj.attr("action", "/board/listMobile");
 		formObj.submit();
 	});
 	
